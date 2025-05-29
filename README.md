@@ -108,9 +108,9 @@ The value of the parameter (symbolic or a field element) can be retried as `t.va
 
 Let $t,t_1,t_2 \in X_0(N)$ (instances of `Level{N}`).
 
-- `t.left(l)`, `t.right(l)`: covers $\mathbb{L}_{N,\ell}(t), \mathbb{R}_{N,\ell}(t)$;
-- `t.dual()`: full duality (Fricke) $\mathbb{w}_{N,N}(t)$;
-- `t.dual(l)`: $ell$-duality (Atkin-Lehner) $\mathbb{w}_{N,\ell}(t)$;
-- `t1.merge(t2, l)`: inverse of covers $\mathbb{M}_{N,\ell}(t)$;
-- `t.turn_tail_one(l)`, `t.turn_head_one(l)`: single-edge head/tail rotations $\mathbb{T}_{N,\ell}(t),\mathbb{H}_{N,\ell}(t)$
-- `t.turn_tail_two(l)`, `t.turn_head_two(l)`: double-edge head/tail rotations $\mathbb{T}_{N,\ell^2}(t),\mathbb{H}_{N,\ell^2}(t)$
+- `t.left(l)`, `t.right(l)`: covers $\mathbf{L}\_{N,\ell}(t)$, $\mathbf{R}\_{N,\ell}(t)$;
+- `t.dual()`: full duality (Fricke) $\mathbf{w}_{N,N}(t)$;
+- `t.dual(l)`: $\ell$-duality (Atkin-Lehner) $\mathbf{w}_{N,\ell}(t)$;
+- `t1.merge(t2, l)`: inverse of covers $\mathbf{M}_{N,\ell}(t)$;
+- `t.turn_tail_one(l)`, `t.turn_head_one(l)`: single-edge head/tail rotations $\mathbf{T}\_{N,\ell}(t),\mathbf{H}_{N,\ell}(t)$
+- `t.turn_tail_two(l)`, `t.turn_head_two(l)`: double-edge head/tail rotations $\mathbf{T}\_{N,\ell^2}(t),\mathbf{H}_{N,\ell^2}(t)$
