@@ -6,6 +6,7 @@ This repository contains framework for working with genus-0 modular curves, incl
 
 - [test_relations.py](./test_relations.py) contains verification of the properties of the maps/equations, both symbolically (as rational maps) and on random values. To be ran with `sage -python -m pytest test_relations.py` (requires `pytest` installed in SageMath).
 - [AlgebraicAttack.ipynb](./AlgebraicAttack.ipynb) implements a naive version of the meet-in-the-middle (GCD) algebraic attack against $2^n$-isogeny path problem.
+- [Examples.ipynb](./Examples.ipynb)] contains some usage examples in the form of notebook.
 
 ## Quick API example
 
@@ -108,9 +109,9 @@ The value of the parameter (symbolic or a field element) can be retried as `t.va
 
 Let $t,t_1,t_2 \in X_0(N)$ (instances of `Level{N}`).
 
-- `t.left(l)`, `t.right(l)`: covers $\mathbf{L}\_{N,\ell}(t)$, $\mathbf{R}\_{N,\ell}(t)$;
+- `t.left(l)`, `t.right(l)`: covers $\mathbf{L}\_{N,\ell}(t),\mathbf{R}\_{N,\ell}(t)$;
 - `t.dual()`: full duality (Fricke) $\mathbf{w}_{N,N}(t)$;
 - `t.dual(l)`: $\ell$-duality (Atkin-Lehner) $\mathbf{w}_{N,\ell}(t)$;
 - `t1.merge(t2, l)`: inverse of covers $\mathbf{M}_{N,\ell}(t)$;
-- `t.turn_tail_one(l)`, `t.turn_head_one(l)`: single-edge head/tail rotations $\mathbf{T}\_{N,\ell}(t),\mathbf{H}_{N,\ell}(t)$
-- `t.turn_tail_two(l)`, `t.turn_head_two(l)`: double-edge head/tail rotations $\mathbf{T}\_{N,\ell^2}(t),\mathbf{H}_{N,\ell^2}(t)$
+- `t.turn_tail_one(l)`, `t.turn_head_one(l)`: single-edge head/tail rotations $\mathbf{T}\_{N,\ell}(t),\mathbf{H}\_{N,\ell}(t)$
+- `t.turn_tail_two(l)`, `t.turn_head_two(l)`: double-edge head/tail rotations $\mathbf{T}\_{N,\ell^2}(t),\mathbf{H}\_{N,\ell^2}(t)$
