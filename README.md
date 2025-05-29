@@ -4,7 +4,10 @@ This repository contains framework for working with genus-0 modular curves, incl
 
 ## Included programs
 
-- [test_relations.py](./test_relations.py) contains verification of the properties of the maps/equations, both symbolically (as rational maps) and on random values. To be ran with `sage -python -m pytest test_relations.py` (requires `pytest` installed in SageMath).
+The tests can be ran with `make` or `sage -python -m pytest test_*.py` (requires `pytest` installed within SageMath).
+
+- [test_relations.py](./test_relations.py) verifies the properties of the maps/equations symbolically (as rational maps).
+- [test_Maier.py](./test_Maier.py) verifies equivalence of parameters in this framework and the canonical Maier's parameters.
 - [AlgebraicAttack.ipynb](./AlgebraicAttack.ipynb) implements a naive version of the meet-in-the-middle (GCD) algebraic attack against $2^n$-isogeny path problem.
 - [Examples.ipynb](./Examples.ipynb) contains some usage examples in the form of notebook.
 
