@@ -37,35 +37,35 @@ t.sample_fw(5)
 The full list of currently supported parameters is:
 
 Binary hierarchy:
-- `Level1` ($X_0(1)$)
-- `Level2` ($X_0(2)$)
-- `Level4` ($X_0(4)$)
-- `Level8` ($X_0(8)$)
-- `Level16` ($X_0(16)$)
+- `Level1` ( $X_0(1)$ )
+- `Level2` ( $X_0(2)$ )
+- `Level4` ( $X_0(4)$ )
+- `Level8` ( $X_0(8)$ )
+- `Level16` ( $X_0(16)$ )
 
 Multiples of 3:
-- `Level3` ($X_0(3)$)
-- `Level6` ($X_0(6)$)
-- `Level9` ($X_0(9)$)
-- `Level12` ($X_0(12)$)
-- `Level18` ($X_0(18)$)
+- `Level3` ( $X_0(3)$ )
+- `Level6` ( $X_0(6)$ )
+- `Level9` ( $X_0(9)$ )
+- `Level12` ( $X_0(12)$ )
+- `Level18` ( $X_0(18)$ )
 
-Non-split Cartan subgroups (inside towers $X_0(12)$ and $X_0(18)$):
-- `Gamma3` ($\gamma_3 \in X_{\mathrm{ns}}(2)$, $\gamma_3=\sqrt{j-1728}$)
-- `Gamma3_Level3` ($Z=X_0(3)\otimes X_{\mathrm{ns}}(2)$)
-- `Gamma2` ($\gamma_2 \in X_{\mathrm{ns}}^+(3)$, $\gamma_2=\sqrt[3]{j}$)
-- `Gamma2_Level2` ($Y=X_0(2)\otimes X_{\mathrm{ns}}^+(3)$)
+Non-split Cartan subgroups (inside towers $X_0(12)$ and $X_0(18)$ ):
+- `Gamma3` ( $\gamma_3 \in X_{\mathrm{ns}}(2)$, $\gamma_3=\sqrt{j-1728}$ )
+- `Gamma3_Level3` ( $Z=X_0(3)\otimes X_{\mathrm{ns}}(2)$ )
+- `Gamma2` ( $\gamma_2 \in X_{\mathrm{ns}}^+(3)$, $\gamma_2=\sqrt[3]{j}$ )
+- `Gamma2_Level2` ( $Y=X_0(2)\otimes X_{\mathrm{ns}}^+(3)$ )
 
 Multiples of 5:
-- `Level5` ($X_0(5)$)
-- `Level10` ($X_0(10)$)
-- `Level25` ($X_0(25)$)
-- `Level5_X1` ($X_1(5)$)
-- `Level25_X5` ($X(5)$)
+- `Level5` ( $X_0(5)$ )
+- `Level10` ( $X_0(10)$ )
+- `Level25` ( $X_0(25)$ )
+- `Level5_X1` ( $X_1(5)$ )
+- `Level25_X5` ( $X(5)$ )
 
 Remaining $X_0(N)$ of genus 0:
-- `Level7` ($X_0(7)$)
-- `Level13` ($X_0(13)$)
+- `Level7` ( $X_0(7)$ )
+- `Level13` ( $X_0(13)$ )
 
 
 ### Instantiating parameters
@@ -80,10 +80,3 @@ The parameter can be instantiated in the following ways:
   `t = Level0(1728, S=Setting(p=19))`
 
 The value of the parameter (symbolic or a field element) can be retried as `t.value`.
-
-### List of main methods
-
-- L,R
-- w
-- M
-- T,H
