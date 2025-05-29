@@ -6,12 +6,12 @@ This repository contains framework for working with genus-0 modular curves, incl
 
 - [test_relations.py](./test_relations.py) contains verification of the properties of the maps/equations, both symbolically (as rational maps) and on random values. To be ran with `sage -python -m pytest test_relations.py` (requires `pytest` installed in SageMath).
 - [AlgebraicAttack.ipynb](./AlgebraicAttack.ipynb) implements a naive version of the meet-in-the-middle (GCD) algebraic attack against $2^n$-isogeny path problem.
-- [Examples.ipynb](./Examples.ipynb)] contains some usage examples in the form of notebook.
+- [Examples.ipynb](./Examples.ipynb) contains some usage examples in the form of notebook.
 
 ## Quick API example
 
 ```python
-> from parameters import Level4, Level8, Level16
+> from parameters import Level1, Level4, Level8, Level16
 > from setting import Setting
 > t = Level16()
 > t.left(), t.right()
@@ -39,15 +39,42 @@ This repository contains framework for working with genus-0 modular curves, incl
 
 True
 
-# sample a 2-isogeny path of 5 elements
-# following this parameter
+> # sample a 2-isogeny path of 5 elements
+> # following this parameter
 > t.sample_fw(5, skip=0)
 
 [<Level4:A=6>,
-<Level4:A=3*i + 10>,
-<Level4:A=10*i>,
+<Level4:A=16*i + 10>,
+<Level4:A=9*i>,
 <Level4:A=13>,
 <Level4:A=16*i + 10>]
+
+> # propagate 2- and 3- isogeny from j-invariants
+> j1 = Setting(p=1051).j0.sample_fw(1, l=2, skip=10) # do some walk to get a random one
+> j2 = j1.sample_fw(l=2)
+> j3 = j1.sample_fw(l=3)
+> assert j1.phi(j2, l=2) == 0
+> assert j1.phi(j3, l=3) == 0
+> j1, j2, j3
+
+(<Level1:j=403*i + 524>, <Level1:j=798*i + 457>, <Level1:j=443*i + 842>)
+
+> # note: reverse order
+> # because MergeBar requires
+> # equality of rights
+> D12 = j2.merge(j1, l=2)
+> D13 = j3.merge(j1, l=3)
+> D6 = D12.merge(D13)
+> D6
+
+<Level6:t=480*i + 481>
+
+> j6 = D6.left().left()
+> assert j6.phi(j2, l=3) == 0
+> assert j6.phi(j3, l=2) == 0
+> j6
+
+<Level1:j=390*i + 6>
 ```
 
 ## Code structure
