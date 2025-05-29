@@ -10,13 +10,28 @@ This repository contains framework for working with genus-0 modular curves, incl
 ## Quick API example
 
 ```python
-> from parameters import Level4, Level16
+> from parameters import Level4, Level8, Level16
 > from setting import Setting
-
 > t = Level16()
-> t.right().right().right()
+> t.left(), t.right()
 
-<Level2:D=256*r^8 - 256*r^4>
+(<Level8:a=(1/2*r^2 + 1/2)/r>, <Level8:a=r^2>)
+
+> t.left().phi(t.right())
+
+0
+
+> x, y = QQ['x,y'].gens()
+> Level16(x).phi(Level16(y))
+
+-2*x^2*y + y^2 + 1
+
+> t.left().merge(t.right())
+
+<Level16:r=r>
+
+> Level8(x).merge(Level8(y), check=False)
+<Level16:r=(y + 1)/(2*x)>
 
 > t = Level4(6, S=Setting(p=19))
 > t.is_supersingular()
@@ -25,13 +40,13 @@ True
 
 # sample a 2-isogeny path of 5 elements
 # following this parameter
-> t.sample_fw(5)
+> t.sample_fw(5, skip=0)
 
-[<Level4:A=3*i + 10>,
+[<Level4:A=6>,
+<Level4:A=3*i + 10>,
 <Level4:A=10*i>,
-<Level4:A=0>,
-<Level4:A=6>,
-<Level4:A=3*i + 10>]
+<Level4:A=13>,
+<Level4:A=16*i + 10>]
 ```
 
 ## Code structure
@@ -91,8 +106,11 @@ The value of the parameter (symbolic or a field element) can be retried as `t.va
 
 ### List of main methods
 
-- `t.left(l)`, `t.right(l)`
-- `t.dual(l)`
-- `t1.merge(t2, l)`
-- `t.turn_tail_one()`, `t.turn_head_one()`
-- `t.turn_tail_two()`, `t.turn_head_two()`
+Let $t,t_1,t_2 \in X_0(N)$ (instances of `Level{N}`).
+
+- `t.left(l)`, `t.right(l)`: covers $\mathbb{L}_{N,\ell}(t), \mathbb{R}_{N,\ell}(t)$;
+- `t.dual()`: full duality (Fricke) $\mathbb{w}_{N,N}(t)$;
+- `t.dual(l)`: $ell$-duality (Atkin-Lehner) $\mathbb{w}_{N,\ell}(t)$;
+- `t1.merge(t2, l)`: inverse of covers $\mathbb{M}_{N,\ell}(t)$;
+- `t.turn_tail_one(l)`, `t.turn_head_one(l)`: single-edge head/tail rotations $\mathbb{T}_{N,\ell}(t),\mathbb{H}_{N,\ell}(t)$
+- `t.turn_tail_two(l)`, `t.turn_head_two(l)`: double-edge head/tail rotations $\mathbb{T}_{N,\ell^2}(t),\mathbb{H}_{N,\ell^2}(t)$
