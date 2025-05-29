@@ -358,13 +358,13 @@ class Parameter(Param):
     # def jp(self, i) -> Param:
     #     return self.j(i, values=False)
 
-    def proj(self, i, d=None, h=None):
+    def proj(self, i, l=None, h=None):
         """Projection through all/`h` levels by main up-left/up-right projections"""
         assert i >= 0
-        if d is None:
-            d = min(self.EXP)
+        if l is None:
+            l = min(self.EXP)
         if h is None:
-            h = self.EXP[d]
+            h = self.EXP[l]
         i0 = i
 
 
@@ -384,63 +384,63 @@ class Parameter(Param):
         v = self.TREE[i](self)
         return v.value if values else v
 
-    def expand_fw_one(self, d=None, parent=None):
-        if d is None:
-            d = min(self.EXP)
-        poly = lambda B: getattr(self, "raw_phi_eq%d" % d)(self.value, B)
+    def expand_fw_one(self, l=None, parent=None):
+        if l is None:
+            l = min(self.EXP)
+        poly = lambda B: getattr(self, "raw_phi_eq%d" % l)(self.value, B)
         roots = self.S.roots(poly)
         return [self.new(r) for r in roots if r != parent]
 
-    def expand_bk_one(self, n=1, d=None, parent=None):
-        if d is None:
-            d = min(self.EXP)
-        poly = lambda B: getattr(self, "raw_phi_eq%d" % d)(B, self.value)
+    def expand_bk_one(self, n=1, l=None, parent=None):
+        if l is None:
+            l = min(self.EXP)
+        poly = lambda B: getattr(self, "raw_phi_eq%d" % l)(B, self.value)
         roots = self.S.roots(poly)
         return [self.new(r) for r in roots if r != parent]
 
-    def expand_fw(self, n=1, d=None, parent=None):
+    def expand_fw(self, n=1, l=None, parent=None):
         """All parameters reachable by exactly `n` forward Phi-steps."""
-        if d is None:
-            d = min(self.EXP)
+        if l is None:
+            l = min(self.EXP)
         assert n >= 0
         if n == 0:
             return [self]
 
-        sub = self.expand_fw_one(d=d, parent=parent)
+        sub = self.expand_fw_one(l=l, parent=parent)
         if n == 1:
             return sub
 
         ret = []
         for p in sub:
-            ret.extend(p.expand_fw(n=n-1, d=d, parent=self.value))
+            ret.extend(p.expand_fw(n=n-1, l=l, parent=self.value))
         return ret
 
-    def expand_bk(self, n=1, d=None, parent=None):
+    def expand_bk(self, n=1, l=None, parent=None):
         """All parameters reachable by exactly `n` backward Phi-steps."""
-        if d is None:
-            d = min(self.EXP)
+        if l is None:
+            l = min(self.EXP)
         assert n >= 0
         if n == 0:
             return [self]
 
-        sub = self.expand_bk_one(d=d, parent=parent)
+        sub = self.expand_bk_one(l=l, parent=parent)
         if n == 1:
             return sub
 
         ret = []
         for p in sub:
-            ret.extend(p.expand_bk(n=n-1, d=d, parent=self.value))
+            ret.extend(p.expand_bk(n=n-1, l=l, parent=self.value))
         return ret
 
-    def sample_fw(self, n=1, d=None, width=1, skip=1):
+    def sample_fw(self, n=1, l=None, width=1, skip=1):
         """Sample `n` forward Phi-steps randomly.
         If `width` > 1, then return tuples of consequtive `width` parameters."""
-        if d is None:
-            d = min(self.EXP)
+        if l is None:
+            l = min(self.EXP)
         lst = [self]
         parent = None
         for i in range(n + skip + width - 2):
-            lst.append(choice(lst[-1].expand_fw_one(d=d, parent=parent)))
+            lst.append(choice(lst[-1].expand_fw_one(l=l, parent=parent)))
             parent = lst[-2].value
 
         if width == 1:
@@ -449,15 +449,15 @@ class Parameter(Param):
             ret = list(zip(*[lst[skip+i:] for i in range(width)]))
         return ret if len(ret) > 1 else ret[0]
 
-    def sample_bk(self, n=1, d=None, width=1, skip=1):
+    def sample_bk(self, n=1, l=None, width=1, skip=1):
         """Sample `n` backward Phi-steps randomly.
         If `width` > 1, then return tuples of consequtive `width` parameters."""
-        if d is None:
-            d = min(self.EXP)
+        if l is None:
+            l = min(self.EXP)
         lst = [self]
         parent = None
         for i in range(n + skip + width - 2):
-            lst.append(choice(lst[-1].expand_bk_one(d=d, parent=parent)))
+            lst.append(choice(lst[-1].expand_bk_one(l=l, parent=parent)))
             parent = lst[-2].value
 
         if width == 1:

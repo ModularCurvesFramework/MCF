@@ -67,7 +67,7 @@ class Setting:
 
         from parameters import Level1
         self.j0 = Level1(j0, S=self)
-        self.D0 = self.j0.merge(self.j0.sample_fw(d=2), d=2)
+        self.D0 = self.j0.merge(self.j0.sample_fw(l=2), l=2)
         self.A0 = self.D0.merge(self.D0.sample_fw())
         self.a0 = self.A0.merge(self.A0.sample_fw())
         self.r0 = self.a0.merge(self.a0.sample_fw())
